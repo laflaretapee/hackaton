@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+!.env.example
+.deploy/*
+!.deploy/ai-buddy
+**/node_modules
+**/coverage
+**/*.log
+**/coverage.out
+**/.DS_Store

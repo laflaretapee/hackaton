@@ -1,0 +1,55 @@
+PASS health
+PASS anonymous data protected
+PASS anonymous admin settings protected
+PASS cross-origin mutations rejected
+PASS admin role cannot be self-selected
+PASS cross-user task protected
+PASS manual task updates persisted progress
+PASS knowledge read persisted
+PASS passing exam completes learning task
+PASS exam evaluated and persisted
+PASS access question retrieves access instruction first
+PASS long chat message accepted
+PASS chat answer contains valid knowledge sources
+PASS request requires explicit confirmation
+PASS unrelated resource does not complete GitLab task
+PASS intern cannot approve access
+PASS other intern cannot inspect protected profile
+PASS mentor approval updates access task
+PASS later rejection preserves completed access
+PASS manager analytics use persisted records
+PASS notification preference persisted
+PASS demo meeting created
+PASS admin secrets masked
+PASS admin provider SSRF rejected
+PASS profile deletion invalidates session
+{
+  "passed": 25,
+  "checks": [
+    "health",
+    "anonymous data protected",
+    "anonymous admin settings protected",
+    "cross-origin mutations rejected",
+    "admin role cannot be self-selected",
+    "cross-user task protected",
+    "manual task updates persisted progress",
+    "knowledge read persisted",
+    "passing exam completes learning task",
+    "exam evaluated and persisted",
+    "access question retrieves access instruction first",
+    "long chat message accepted",
+    "chat answer contains valid knowledge sources",
+    "request requires explicit confirmation",
+    "unrelated resource does not complete GitLab task",
+    "intern cannot approve access",
+    "other intern cannot inspect protected profile",
+    "mentor approval updates access task",
+    "later rejection preserves completed access",
+    "manager analytics use persisted records",
+    "notification preference persisted",
+    "demo meeting created",
+    "admin secrets masked",
+    "admin provider SSRF rejected",
+    "profile deletion invalidates session"
+  ]
+}

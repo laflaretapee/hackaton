@@ -1,0 +1,9 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.backend-prebuilt
+  frontend:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.frontend-prebuilt

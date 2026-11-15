@@ -1,0 +1,2 @@
+1f17213f28eca5ea23324617a2433839b014b357be164cebc9fea6ce46adcf6b  .deploy/ai-buddy
+f6f80bab8729e638f383cd6e6863a39cf8caa83029e2d89371470f46378fc990  frontend/dist/index.html

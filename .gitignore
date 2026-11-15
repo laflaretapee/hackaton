@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+coverage/
+*.out
+*.log
+.DS_Store
+.superpowers/
+.deploy/
+__pycache__/
+*.pyc

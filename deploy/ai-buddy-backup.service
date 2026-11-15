@@ -1,0 +1,6 @@
+[Unit]
+Description=AI-buddy database backup
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/ai-buddy
+ExecStart=/opt/ai-buddy/scripts/backup.sh

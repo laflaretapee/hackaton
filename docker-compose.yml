@@ -1,0 +1,68 @@
+name: ai-buddy
+x-logging: &bounded-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    logging: *bounded-logging
+    environment:
+      POSTGRES_DB: ai_buddy
+      POSTGRES_USER: ai_buddy
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U ai_buddy -d ai_buddy']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    mem_limit: 256m
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    logging: *bounded-logging
+    environment:
+      DATABASE_URL: postgres://ai_buddy:${POSTGRES_PASSWORD}@db:5432/ai_buddy?sslmode=disable
+      APP_ENV: production
+      TRUST_PROXY: "true"
+      GOMEMLIMIT: 300MiB
+      APP_URL: ${APP_URL:?Set APP_URL}
+      PUBLIC_BASE_URL: ${APP_URL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY}
+      SECURE_COOKIES: ${SECURE_COOKIES:-true}
+      DEMO_MODE: ${DEMO_MODE:-true}
+      AI_MOCK_MODE: ${AI_MOCK_MODE:-true}
+      TZ: Asia/Yekaterinburg
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8080/health]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    mem_limit: 384m
+    security_opt: [no-new-privileges:true]
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    logging: *bounded-logging
+    ports:
+      - '127.0.0.1:8095:80'
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1/]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    mem_limit: 96m
+    security_opt: [no-new-privileges:true]
+volumes:
+  postgres_data:

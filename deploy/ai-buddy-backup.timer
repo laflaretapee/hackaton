@@ -1,0 +1,7 @@
+[Unit]
+Description=Daily AI-buddy database backup
+[Timer]
+OnCalendar=*-*-* 03:30:00 Asia/Yekaterinburg
+Persistent=true
+[Install]
+WantedBy=timers.target
